@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
@@ -11,6 +11,10 @@ class Login extends React.Component {
       login: '',
       senha: ''
     }
+  }
+  _OnPress = () =>{
+
+    this.props.navigation.navigate('Home')
   }
   render() {
     return (
@@ -26,6 +30,8 @@ class Login extends React.Component {
               color='black'
             />
           }
+          onChangeText={value => this.setState({ login: value })}
+
         />
         <Input
           secureTextEntry={true}
@@ -34,12 +40,28 @@ class Login extends React.Component {
           placeholder='*********'
           leftIcon={
             <Icon
-              name='unlock-alt'
+              name='lock'
               size={20}
               color='black'
             />
           }
+          onChangeText={value => this.setState({ senha: value })}
+
         />
+        <TouchableOpacity
+        style={styles.button}
+        onPress={this._OnPress}
+        >
+          <Text style={styles.textButton}>Entrar</Text>
+        </TouchableOpacity>
+        <View style={styles.container2}>
+          <TouchableOpacity>
+            <Text style={styles.textButton}>Recuperar senha</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.textButton}>Cadastre-se</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
